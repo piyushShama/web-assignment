@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${assignment}"></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<form action="#" th:action="@{/submit}" th:object="${info}" method="Post">
+
+    <div style="text-align: center;color: darkred" th:if="${not #lists.isEmpty(errors)}" >
+        Errors:
+        <span th:each="error:${errors}" th:text="${error}"></span>
+
+    </div>
+
+    <div class="container">
+        <div class="form-group ">
+            <label for="username">User Name:</label>
+            <input type="text" class="form-control" required="true" id="username" th:field="*{username}">
+        </div>
+
+        <div class="date-picker">
+            <label for="dob" >Date of Birth</label>
+            <input type="datetime-local" id="dob" th:field="*{dob}" placeholder="select Birth date" >
+        </div>
+
+        <div class="radio-button">
+            <label>  Gender: </label>
+            <div class="radio-button">
+                <label class="radio-menu-item"><input type="radio" required="true" th:value="Male" name="gender" th:field="*{gender}">
+                    Male</label>
+                <label class="radio-menu-item"><input type="radio" required="true"  th:value="Female" name="gender" th:field="*{gender}">
+                    Female </label>
+            </div>
+        </div>
+
+
+        <div class="check-box">
+            <label>Roles:</label>
+                <div th:each="role : ${allRoles}">
+
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="roles"
+                               th:text="${role.name}"
+                               th:value="${role}"
+                               th:field="*{roles}"
+                        />
+                    </label>
+                </div>
+        </div>
+
+        <div class="text-area">
+            <label for="notes">Notes :</label>
+            <textarea type="textarea" class="form-control" id="notes" th:field="*{notes}" >
+            </textarea>
+        </div>
+
+        <div class="button">
+            <button type="submit" class="btn btn-default">Submit</button>
+            <a th:href="@{/distance/coversion}">Use me to convert mile to km and km to meter</a>
+        </div>
+
+
+    </div>
+
+</form>
+
+</body>
+</html>
