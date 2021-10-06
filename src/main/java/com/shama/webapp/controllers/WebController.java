@@ -22,7 +22,7 @@ import java.util.EnumSet;
 import java.util.stream.Collectors;
 
 @Controller
-public class WebController {
+public class WebController  {
 
     @Autowired
     RestTemplate template;
