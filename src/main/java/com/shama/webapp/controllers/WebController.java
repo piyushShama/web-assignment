@@ -74,6 +74,7 @@ public class WebController {
             if (result.hasBody()) {
                 model.addAttribute("conversion", result.getBody());
             }
+            //@TODO show error
         }
         model.addAttribute("distance", distance);
         model.addAttribute("allUnits", Unit.values());
