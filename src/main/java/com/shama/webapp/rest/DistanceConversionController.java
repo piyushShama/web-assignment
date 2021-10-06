@@ -1,4 +1,4 @@
-package com.shama.webapp.controllers;
+package com.shama.webapp.rest;
 
 import com.shama.webapp.models.Distance;
 import com.shama.webapp.models.Unit;
@@ -14,14 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/distance")
 public class DistanceConversionController {
 
-    @Autowired
-    DistanceConversion distanceConversion;
-
     @GetMapping("/convert/{from}/{quantity}/{to}")
     public ResponseEntity<Double> convert(@PathVariable String from, @PathVariable Double quantity, @PathVariable String to){
         Unit fromUnit= Unit.valueOf(from);
         Unit toUnit= Unit.valueOf(to);
-        return ResponseEntity.ok(distanceConversion.convert(quantity,fromUnit,toUnit));
+        return ResponseEntity.ok(DistanceConversion.convert(quantity,fromUnit,toUnit));
     }
 
 }
