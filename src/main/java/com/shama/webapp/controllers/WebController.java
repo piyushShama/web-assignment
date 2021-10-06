@@ -16,6 +16,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.stream.Collectors;
 
 @Controller
@@ -54,18 +56,20 @@ public class WebController {
     public String distanceConversion(Model model) {
         model.addAttribute("distance", new Distance());
         model.addAttribute("allUnits", Unit.values());
-
         return "distance-conversion";
     }
 
     @PostMapping("/convert")
     public String convert(@ModelAttribute Distance distance, Model model) {
-        StringBuilder url = new StringBuilder("http://localhost:8080/distance/convert/");
-        url.append(distance.getFromUnit().name()).append("/").append(distance.getQuantity()).append("/").append(distance.getToUnit().name());
-        ResponseEntity<Double> result= template.getForEntity(url.toString(), Double.class);
-        if(result.hasBody())
-        {
-            model.addAttribute("conversion",result.getBody());
+        if (distance.getFromUnit() == distance.getToUnit()) {
+            model.addAttribute("error", "From Unit and To Unit must be different");
+        } else {
+            StringBuilder url = new StringBuilder("http://localhost:8080/distance/convert/");
+            url.append(distance.getFromUnit().name()).append("/").append(distance.getQuantity()).append("/").append(distance.getToUnit().name());
+            ResponseEntity<Double> result = template.getForEntity(url.toString(), Double.class);
+            if (result.hasBody()) {
+                model.addAttribute("conversion", result.getBody());
+            }
         }
         model.addAttribute("distance", distance);
         model.addAttribute("allUnits", Unit.values());

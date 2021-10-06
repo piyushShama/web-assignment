@@ -14,13 +14,15 @@
    <div style="text-align: center"></div>
     Hi <span th:text="*{username}" /> !! Welcome !! Please find below your details
 
-    Your Details:
     <br>
-    Gender:   <span th:text="*{gender}" />
     <br>
-    Roles:  <span th:text="*{roles}" />
+    <b> Gender:</b>   <span th:text="*{gender}" />
     <br>
-    Notes:  <span th:text="*{notes}" />
+    <b> Roles: </b>  <span th:text="*{roles}" />
+    <br>
+    <b>Date of Birth:</b> <span th:text="*{dob}" />
+    <br>
+    <b>Notes:</b>  <span th:text="*{notes}" />
 
     <div class="button">
         <button type="submit" class="btn btn-default">Go Back</button>
