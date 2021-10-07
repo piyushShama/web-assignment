@@ -16,7 +16,7 @@ public class DistanceConversion {
         } else if (Unit.KM == fromUnit && Unit.MT == toUnit) {
             result = quantity * 1000;
         } else if (Unit.MT == fromUnit && Unit.MILE == toUnit) {
-            result = quantity / 1.609344 * 1000;
+            result = (quantity / 1.609344) / 1000;
         } else if (Unit.MT == fromUnit && Unit.KM == toUnit) {
             result = quantity / 1000;
         }
